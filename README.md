@@ -1,10 +1,28 @@
+![n8n Creator Hub](https://img.shields.io/badge/n8n-Creator%20Hub-FF6D5B?style=flat-square&logo=n8n)
+![Maintenance](https://img.shields.io/badge/Maintained-Yes-green?style=flat-square)
+
 # TeloSignal Workflow Vault
 
 > Production-ready n8n workflow templates — built and maintained by [TeloSignal](https://telosignal.com), The n8n Workflow Intelligence Index.
 
+Most n8n workflows are built to "just work." These are built to scale. This vault contains the core logic used by TeloSignal to manage complex data lineage, automated testing, and high-volume processing.
+
 Published on the [n8n Creator Hub](https://n8n.io/creators/patrickn8n/).
 
-## Workflows
+---
+
+## 💎 The TeloSignal Standard
+
+Every workflow in this repository is built using our proprietary **4-Element Formula**. We don't just move data; we build intelligence.
+
+* **Metric:** Defining the success criteria for the automation.
+* **Pattern:** Utilizing proven architectural structures for data flow.
+* **Principle:** Applying rigorous logic gates and error-handling rules.
+* **Question:** Ensuring the workflow answers a specific business hypothesis.
+
+---
+
+## 🚀 Workflows
 
 | Workflow | Category | Description |
 |----------|----------|-------------|
@@ -12,6 +30,17 @@ Published on the [n8n Creator Hub](https://n8n.io/creators/patrickn8n/).
 | [Smart Sales Invoice Processor](workflows/data-processing/smart-sales-invoice-processor/) | Data Processing | Invoice processing with Data Tables |
 | [Benchmark Content Safety Guardrails](workflows/ai-safety/benchmark-content-safety-guardrails/) | AI Safety | Automated test suite & reports for content safety |
 
-## Standards
+---
 
-All workflows follow the 4-element formula: **Metric → Pattern → Principle → Question**.
+## 🛠️ How to Use
+
+1.  **Browse:** Select a workflow from the table above.
+2.  **Download:** Copy the `workflow.json` file from the directory.
+3.  **Import:** In your n8n instance, click **Import from File** or simply paste the JSON into the canvas.
+4.  **Configure:** Add your specific credentials and environment variables as noted in the workflow annotations.
+
+---
+
+## 📝 License
+
+Distributed under the MIT License. See [LICENSE](https://github.com/patrick-creates/telosignal-workflow-vault/blob/main/LICENSE)  for more information.
