@@ -2,6 +2,8 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
 
+**The Hormozi Value Claim:**  "Reduce payment time-delays and administrative effort by 80%, turning a brittle manual billing process into a durable, scalable revenue engine".
+
 ## What this workflow does
 
 Transforms uploaded sales CSV files into validated, enriched invoices stored in n8n Data tables with automated email notifications.

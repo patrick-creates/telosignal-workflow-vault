@@ -2,6 +2,8 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/workflows/10729-benchmark-content-safety-guardrails-with-automated-test-suite-and-reports/) · [TeloSignal](https://telosignal.com)
 
+**The Hormozi Value Claim:** "Protect your brand's 'Dream Outcome' by reducing the risk of catastrophic AI hallucinations to near-zero through automated verification".
+
 ## What this workflow does
 
 Runs 36 structured test prompts through the n8n Guardrails node, classifies each as PASS or VIOLATION, calculates accuracy metrics, and emails a formatted HTML report.
