@@ -22,6 +22,13 @@ Every workflow in this repository is built using our proprietary **4-Element For
 
 ---
 
+## 📊 Market Intelligence Source
+This repository is the execution arm of the [TeloSignal n8n Demand Index](https://www.telosignal.com/data/n8n-use-case-demand-index). 
+
+Every workflow here is built to address specific **"High-Value Scarcity"** gaps identified in our weekly index of 9100+ templates. We don't build random automations; we build for the categories where demand is high but reliable solutions are scarce.
+
+---
+
 ## 🚀 Workflows
 
 | Workflow | Category | Description |
