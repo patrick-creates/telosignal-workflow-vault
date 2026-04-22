@@ -2,6 +2,8 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
 
+**The Hormozi Value Claim:** "Eliminate 90% of manual data enrichment costs while increasing lead-conversion likelihood by providing real-time intelligence directly in your CRM"
+
 ## What this workflow does
 
 Reads every row from a Google Sheet, calls a configurable REST API once per row in rate-limited batches, then writes enriched data back to the sheet or logs errors.
