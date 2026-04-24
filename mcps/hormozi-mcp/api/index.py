@@ -2,7 +2,8 @@ from mcp.server.fastmcp import FastMCP
 import requests
 import os
 
-mcp = FastMCP("HormoziExpert")
+# We set warn_on_untrusted_hosts to False to stop the strict Host header check
+mcp = FastMCP("Hormozi", warn_on_untrusted_hosts=False)
 
 # Helper: Get latest workflow from your GitHub Vault
 def fetch_vault_workflow(name):
