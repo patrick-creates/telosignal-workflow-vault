@@ -1,8 +1,12 @@
 from mcp.server.fastmcp import FastMCP
+from mcp.server.transport_security import TransportSecuritySettings
 import requests
 import os
 
-mcp = FastMCP("Hormozi")
+mcp = FastMCP(
+    "Hormozi",
+    transport_security=TransportSecuritySettings(enable_dns_rebinding_protection=False),
+)
 
 # Helper: Get latest workflow from your GitHub Vault
 def fetch_vault_workflow(name):
