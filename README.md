@@ -48,6 +48,18 @@ Every workflow here is built to address specific **"High-Value Scarcity"** gaps 
 
 ---
 
+## 🧠 MCP Experts
+This vault includes AI Experts hosted on Vercel.
+
+### Hormozi Expert
+
+- **Location:** [mcps/hormozi-mcp](mcps/hormozi-mcp/)
+- **SSE Endpoint:** `https://<your-vercel-project>.vercel.app/sse`
+- **Tool:** `analyze_vault_workflow`
+- **Usage:** Critique workflows using the $100M Offer framework.
+
+---
+
 ## 📝 License
 
 Distributed under the MIT License. See [LICENSE](https://github.com/patrick-creates/telosignal-workflow-vault/blob/main/LICENSE)  for more information.
