@@ -265,3 +265,19 @@ A task is complete only when ALL of the following are true:
 - [ ] `README.md` exists in the workflow folder
 - [ ] `README.md` contains all 4 formula elements (Metric, Pattern, Principle, Question)
 - [ ] Expert Veto review completed and status is CLEARED
+
+## MCP Infrastructure
+- To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/index.py`
+- Deployment: Hosted on Vercel.
+- Frameworks: MCP Python SDK (`mcp>=1.23.0`). DNS rebinding protection disabled via `TransportSecuritySettings(enable_dns_rebinding_protection=False)` — required for Vercel deployment.
+- Live SSE endpoint: `https://<your-vercel-project>.vercel.app/sse`
+
+## Workflow Commands
+- Use `analyze_vault_workflow(name)` to critique any file in the `/workflows` directory.
+- Refer to `mcps/hormozi-mcp/hormozi_kb.md` for Alex Hormozi's business logic.
+
+### MCP Expert Guidelines
+- **Expert Path:** All experts live in `/mcps/[expert-name]`
+- **Deployment:** Each expert is a standalone Vercel Project.
+- **Workflow Access:** Experts fetch raw data from `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows/`.
+- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `index.py` and the KB, then deploy to a new Vercel project.
