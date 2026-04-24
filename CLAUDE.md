@@ -23,7 +23,7 @@ Every workflow must include a dedicated error-handling path. This is not optiona
 - Route failures to at minimum one output: a log entry, a notification node (email/Slack/webhook), or a Data table insert.
 - Never let a workflow fail silently.
 
-```
+```text
 Pattern: Error Trigger → Code (format error payload) → Notify/Log
 ```
 
@@ -71,7 +71,7 @@ const ErrorMessage = ...
 
 All n8n node names use Title Case. Names must be descriptive — describe what the node does, not what type it is.
 
-```
+```text
 // Correct
 "Read Sheet Rows"
 "Call Enrichment API"
@@ -98,7 +98,7 @@ All credentials, API keys, and configuration values injected via n8n environment
 | `NOTIFY_` | Notification service targets (email, Slack webhook URLs) |
 | `WORKFLOW_` | Workflow-specific configuration constants |
 
-```
+```text
 // Correct
 API_OPENAI_KEY
 API_GOOGLE_SHEETS_ID
@@ -115,6 +115,7 @@ BATCHSIZE
 ### Sticky Notes
 
 Sticky notes are part of the workflow documentation. Use them. Every workflow must include at minimum:
+
 - One overview sticky note at the start of the canvas describing what the workflow does and who it is for.
 - One sticky note per configurable parameter block (batch size, wait time, API endpoint, etc.).
 
@@ -131,6 +132,7 @@ Run the following internal check and include the result in your completion summa
 Hormozi asks: *Does this deliver disproportionate value? Is the outcome obvious and immediate to the user?*
 
 Ask yourself:
+
 - What concrete result does this workflow/change produce for the end user?
 - Is the value obvious without explanation, or does it require justification?
 - Would a non-technical business owner immediately understand what they gain?
@@ -142,6 +144,7 @@ Ask yourself:
 Buffett asks: *Does this compound? Is the value durable?*
 
 Ask yourself:
+
 - Does this workflow produce increasing returns the more it is used? (Data accumulates, accuracy improves, time saved scales.)
 - Does it avoid brittle dependencies — external APIs that could disappear, credentials hardcoded in nodes, undocumented magic values?
 - Would someone running this in 12 months be able to maintain it without asking the original author?
@@ -152,7 +155,7 @@ Ask yourself:
 
 Include this block in your completion message:
 
-```
+```text
 ## Expert Veto Review
 
 **Hormozi (Value):** [One sentence: what concrete value does this deliver and to whom.]
@@ -170,7 +173,7 @@ Every workflow in this repo must be in its own folder. No `.json` file exists at
 
 ### Required Folder Structure
 
-```
+```text
 workflows/
 └── <category>/
     └── <workflow-slug>/
@@ -183,6 +186,7 @@ workflows/
 Every `README.md` must follow the 4-element formula in this exact order:
 
 #### 1. Header
+
 ```markdown
 # <Workflow Name>
 
@@ -194,6 +198,7 @@ Every `README.md` must follow the 4-element formula in this exact order:
 ```
 
 #### 2. Metric
+
 ```markdown
 ## Metric
 
@@ -203,6 +208,7 @@ Examples: "Rows enriched per run without rate-limit errors", "Invoices created p
 ```
 
 #### 3. Pattern
+
 ```markdown
 ## Pattern
 
@@ -211,6 +217,7 @@ Examples: "Rate-limited batch loop", "ETL + validation pipeline", "Benchmark har
 ```
 
 #### 4. Principle
+
 ```markdown
 ## Principle
 
@@ -219,6 +226,7 @@ What failure mode it prevents. What tradeoff it accepts.]
 ```
 
 #### 5. Question
+
 ```markdown
 ## Question
 
@@ -227,9 +235,11 @@ This is the use-case exploration prompt.]
 ```
 
 #### 6. Setup (Required)
+
 A numbered setup section. Must include: import instructions, credential configuration steps, any variables that need to be changed, and a test command or method.
 
 #### 7. Nodes Used (Required)
+
 A markdown table with columns `Node` and `Purpose`. Every non-trivial node must be listed.
 
 ### Enforcement
@@ -242,7 +252,7 @@ A markdown table with columns `Node` and `Purpose`. Every non-trivial node must 
 
 ## Repository Structure
 
-```
+```text
 workflows/
 ├── ai-safety/
 ├── data-enrichment/
@@ -267,17 +277,21 @@ A task is complete only when ALL of the following are true:
 - [ ] Expert Veto review completed and status is CLEARED
 
 ## MCP Infrastructure
+
 - To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/index.py`
 - Deployment: Hosted on Vercel.
 - Frameworks: MCP Python SDK (`mcp>=1.23.0`). DNS rebinding protection disabled via `TransportSecuritySettings(enable_dns_rebinding_protection=False)` — required for Vercel deployment.
 - Live SSE endpoint: `https://<your-vercel-project>.vercel.app/sse`
 
 ## Workflow Commands
+
 - Use `analyze_vault_workflow(name)` to critique any file in the `/workflows` directory.
 - Refer to `mcps/hormozi-mcp/hormozi_kb.md` for Alex Hormozi's business logic.
 
 ### MCP Expert Guidelines
+
 - **Expert Path:** All experts live in `/mcps/[expert-name]`
 - **Deployment:** Each expert is a standalone Vercel Project.
 - **Workflow Access:** Experts fetch raw data from `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows/`.
-- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `index.py` and the KB, then deploy to a new Vercel project.
+- **README required:** Every expert folder must contain a `README.md` with: what the expert does, available tools, setup instructions (deploy + local), and stack details.
+- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `index.py`, the KB, and `README.md`, then deploy to a new Vercel project.
