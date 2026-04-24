@@ -29,5 +29,4 @@ def analyze_vault_workflow(workflow_name: str) -> str:
 
     return f"Hormozi Analysis for {workflow_name}:\n\nCONTEXT:\n{kb}\n\nWORKFLOW:\n{workflow_content}"
 
-# In the newest version of FastMCP, this is the correct export
-app = mcp.get_asgi_app()
+app = mcp.sse_app()
