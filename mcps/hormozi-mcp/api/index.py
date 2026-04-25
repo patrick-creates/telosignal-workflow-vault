@@ -2,8 +2,6 @@ import os
 import requests
 import anthropic
 
-from starlette.applications import Starlette
-from starlette.routing import Mount
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 
@@ -73,4 +71,4 @@ Verdict: [one actionable sentence — what to fix before publishing, or "ship it
 
     return f"Hormozi Analysis for {workflow_name}:\n\n{response.content[0].text}"
 
-app = Starlette(routes=[Mount("/", app=mcp.streamable_http_app())])
+app = mcp.streamable_http_app()
