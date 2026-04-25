@@ -40,7 +40,7 @@ def analyze_vault_workflow(workflow_name: str) -> str:
     # Load KB from mcps/hormozi-mcp/hormozi_kb.md relative to this file
     kb_path = os.path.join(os.path.dirname(__file__), "hormozi_kb.md")
     try:
-        with open(kb_path, "r", encoding="utf-8") as f:
+        with open(kb_path, "r", encoding="utf-16") as f:
             kb = f.read()
     except FileNotFoundError:
         kb = "Knowledge base file not found."
