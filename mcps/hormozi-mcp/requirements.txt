@@ -1,3 +1,4 @@
 mcp>=1.23.0
 requests
-uvicorn
+anthropic>=0.40.0
+starlette
