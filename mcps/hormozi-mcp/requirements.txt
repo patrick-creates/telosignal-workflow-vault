@@ -1,6 +1,6 @@
 mcp[cli]>=1.23.0
 requests
-anthropic>=0.40.0
+openai
 httpx
 starlette
 uvicorn
