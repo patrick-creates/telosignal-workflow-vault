@@ -73,4 +73,4 @@ Verdict: [one actionable sentence — what to fix before publishing, or "ship it
 
     return f"Hormozi Analysis for {workflow_name}:\n\n{response.content[0].text}"
 
-app = Starlette(routes=[Mount("/api/mcp", app=mcp.streamable_http_app())])
+app = Starlette(routes=[Mount("/", app=mcp.streamable_http_app())])
