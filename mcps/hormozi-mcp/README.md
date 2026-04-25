@@ -18,7 +18,9 @@ It fetches any workflow from this vault and critiques it through Alex Hormozi's 
 
 ### `analyze_vault_workflow(workflow_name: str)`
 
-Fetches `workflows/<workflow_name>.md` from the GitHub repo and runs it through the Hormozi knowledge base.
+Fetches a workflow from the vault and runs it through the Hormozi knowledge base.
+
+`workflow_name` is the path relative to the `WORKFLOW_GITHUB_RAW_BASE` folder, without file extension. The extension is appended automatically (default: `.md`, set via `WORKFLOW_EXTENSION`).
 
 **Example:**
 
@@ -56,6 +58,19 @@ Verdict: Ship after adding a visible "X rows enriched" output to the webhook res
 ---
 
 ## Setup
+
+### Folder structure
+
+```
+mcps/hormozi-mcp/
+├── api/
+│   ├── index.py
+│   └── hormozi_kb.md    ← KB must be here, co-located with index.py
+├── .env.example
+├── requirements.txt
+├── vercel.json
+└── README.md
+```
 
 ### 1. Deploy to Vercel
 
@@ -98,11 +113,21 @@ Restart your client after saving. Verify that `analyze_vault_workflow` appears i
 
 ```bash
 cd mcps/hormozi-mcp
+cp .env.example .env        # then fill in API_ANTHROPIC_KEY
 pip install -r requirements.txt
 uvicorn api.index:app --host 127.0.0.1 --port 8787
 ```
 
 Local MCP endpoint: `http://127.0.0.1:8787/mcp`
+
+**Environment variables** (all optional except `API_ANTHROPIC_KEY`):
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `API_ANTHROPIC_KEY` | — | **Required.** Your Anthropic API key |
+| `API_MODEL` | `claude-opus-4-7` | Claude model used for analysis |
+| `WORKFLOW_GITHUB_RAW_BASE` | `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows` | Base URL for vault fetches — override when forking |
+| `WORKFLOW_EXTENSION` | `.md` | File extension appended to workflow name |
 
 ---
 
@@ -170,6 +195,16 @@ Expected response on Step 3:
 
 ---
 
+## Troubleshooting
+
+| Response | Cause |
+| --- | --- |
+| `"Workflow not found."` | Path is wrong or the file doesn't exist at `WORKFLOW_GITHUB_RAW_BASE/<name><ext>` |
+| `"Connection to Vault failed."` | GitHub unreachable, or `WORKFLOW_GITHUB_RAW_BASE` points to a private or nonexistent repo |
+| Tool call hangs >20 s | GitHub fetch timed out — check vault repo visibility and network access |
+
+---
+
 ## Knowledge Base
 
 `hormozi_kb.md` — contains the $100M Offer and $100M Leads frameworks used for critiques. Edit this file to update the expert's reasoning without touching any code.
@@ -187,9 +222,11 @@ Expected response on Step 3:
 
 ## Stack
 
-| Component       | Detail                                                                              |
-| --------------- | ----------------------------------------------------------------------------------- |
-| Framework       | MCP Python SDK (`mcp[cli]>=1.23.0`)                                                 |
-| Transport       | Streamable HTTP via `mcp.streamable_http_app()`                                     |
-| Deployment      | Vercel (Python serverless, entrypoint `api/index.py`)                               |
-| Host validation | Disabled via `TransportSecuritySettings` — required for Vercel deployment            |
+| Component       | Detail                                                                                                                                             |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Framework       | MCP Python SDK (`mcp[cli]>=1.23.0`)                                                                                                                |
+| Transport       | Streamable HTTP via `mcp.streamable_http_app()`                                                                                                    |
+| Deployment      | Vercel (Python serverless, entrypoint `api/index.py`)                                                                                              |
+| Model           | Configurable via `API_MODEL` env var (default: `claude-opus-4-7`)                                                                                  |
+| Max tokens      | 1024 per response — edit `max_tokens` in `api/index.py` for longer workflows                                                                       |
+| Host validation | Disabled via `TransportSecuritySettings` — required for Vercel serverless (Vercel's runtime doesn't perform DNS resolution the MCP SDK expects)    |

@@ -1,9 +1,16 @@
 import os
 import requests
 import anthropic
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from mcp.server.fastmcp import FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
+
+MODEL = os.environ["API_MODEL"]
+RAW_BASE = os.environ["WORKFLOW_GITHUB_RAW_BASE"]
+WORKFLOW_EXT = os.environ["WORKFLOW_EXTENSION"]
 
 mcp = FastMCP(
     "Hormozi",
@@ -18,7 +25,7 @@ def test_server() -> str:
     return "✅ Hormozi MCP server is running on Vercel!"
 
 def fetch_vault_workflow(name: str) -> str:
-    url = f"https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows/{name}.md"
+    url = f"{RAW_BASE}/{name}{WORKFLOW_EXT}"
     try:
         r = requests.get(url, timeout=20)
         return r.text if r.status_code == 200 else "Workflow not found."
@@ -41,7 +48,7 @@ def analyze_vault_workflow(workflow_name: str) -> str:
     client = anthropic.Anthropic(api_key=os.environ.get("API_ANTHROPIC_KEY"))
 
     response = client.messages.create(
-        model="claude-opus-4-7",
+        model=MODEL,
         max_tokens=1024,
         system=kb,
         messages=[
