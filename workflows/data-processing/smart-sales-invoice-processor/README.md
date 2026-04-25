@@ -2,7 +2,7 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue)
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Reduce payment time-delays and administrative effort by 80%, turning a brittle manual billing process into a durable, scalable revenue engine.
 
@@ -92,4 +92,4 @@ What would you automate next — real email delivery via Gmail/SMTP, or a dashbo
 ## Related
 
 - [Google Sheets Batch Enrichment](../../data-enrichment/google-sheets-batch-enrichment/) — rate-limited batch loop for API enrichment at scale
-- [n8n docs: Data Tables](https://docs.n8n.io/data/data-table/) — create, query, and manage native n8n data stores
+- [n8n docs: Data Tables](https://docs.n8n.io/data/data-tables/) — create, query, and manage native n8n data stores

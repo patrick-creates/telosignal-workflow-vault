@@ -2,7 +2,7 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue)
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Enrich entire spreadsheets at scale without triggering rate limits — turning a manual API-per-row task into a hands-off batch pipeline.
 

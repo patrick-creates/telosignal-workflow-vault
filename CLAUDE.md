@@ -192,7 +192,7 @@ Every `README.md` must follow the 4-element formula in this exact order:
 
 > Published on [n8n Creator Hub](<url>) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D<version>-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue)
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D<version>-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > <Hormozi Value Claim — one sentence: what disproportionate outcome does this deliver and for whom?>
 
