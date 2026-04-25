@@ -278,7 +278,7 @@ A task is complete only when ALL of the following are true:
 
 ## MCP Infrastructure
 
-- To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/mcp.py`
+- To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/index.py`
 - Deployment: Hosted on Vercel.
 - Frameworks: MCP Python SDK (`mcp>=1.23.0`). DNS rebinding protection disabled via `TransportSecuritySettings(enable_dns_rebinding_protection=False)` — required for Vercel deployment.
 - Live SSE endpoint: `https://<your-vercel-project>.vercel.app/sse`
