@@ -278,7 +278,7 @@ A task is complete only when ALL of the following are true:
 
 ## MCP Infrastructure
 
-- To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/index.py`
+- To run the Hormozi Expert locally: `python mcps/hormozi-mcp/api/mcp.py`
 - Deployment: Hosted on Vercel.
 - Frameworks: MCP Python SDK (`mcp>=1.23.0`). DNS rebinding protection disabled via `TransportSecuritySettings(enable_dns_rebinding_protection=False)` — required for Vercel deployment.
 - Live SSE endpoint: `https://<your-vercel-project>.vercel.app/sse`
@@ -294,4 +294,4 @@ A task is complete only when ALL of the following are true:
 - **Deployment:** Each expert is a standalone Vercel Project.
 - **Workflow Access:** Experts fetch raw data from `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows/`.
 - **README required:** Every expert folder must contain a `README.md` with: what the expert does, available tools, setup instructions (deploy + local), and stack details.
-- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `index.py`, the KB, and `README.md`, then deploy to a new Vercel project.
+- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `mcp.py`, the KB, and `README.md`, then deploy to a new Vercel project.
