@@ -2,11 +2,18 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
 
-**The Hormozi Value Claim:**  "Reduce payment time-delays and administrative effort by 80%, turning a brittle manual billing process into a durable, scalable revenue engine".
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue)
+
+> Reduce payment time-delays and administrative effort by 80%, turning a brittle manual billing process into a durable, scalable revenue engine.
 
 ## What this workflow does
 
 Transforms uploaded sales CSV files into validated, enriched invoices stored in n8n Data tables with automated email notifications.
+
+## Workflow Overview
+
+<!-- screenshot.png — export canvas from n8n UI and place in this folder -->
+![Smart Sales Invoice Processor workflow canvas](screenshot.png)
 
 ## Metric
 
@@ -25,6 +32,14 @@ Validation-first catches bad data before any processing occurs, returning struct
 What would you automate next — real email delivery via Gmail/SMTP, or a dashboard pulling from the Invoices Data table?
 
 ---
+
+## Prerequisites
+
+| Requirement | Detail |
+|---|---|
+| n8n version | ≥ 1.0 · 2.x compatible |
+| Credentials | None — fully native n8n |
+| n8n features | Data tables (built-in from n8n 1.x+) |
 
 ## Setup
 
@@ -73,3 +88,8 @@ What would you automate next — real email delivery via Gmail/SMTP, or a dashbo
 | Data table (insert) | Saves validated invoices |
 | Code | Builds personalized email confirmation per invoice |
 | Respond to Webhook | Returns structured JSON (200 / 400 / 409) |
+
+## Related
+
+- [Google Sheets Batch Enrichment](../../data-enrichment/google-sheets-batch-enrichment/) — rate-limited batch loop for API enrichment at scale
+- [n8n docs: Data Tables](https://docs.n8n.io/data/data-table/) — create, query, and manage native n8n data stores
