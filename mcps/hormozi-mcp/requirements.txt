@@ -3,3 +3,5 @@ requests
 anthropic>=0.40.0
 httpx
 starlette
+uvicorn
+python-dotenv
