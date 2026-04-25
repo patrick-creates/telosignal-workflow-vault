@@ -192,10 +192,26 @@ Every `README.md` must follow the 4-element formula in this exact order:
 
 > Published on [n8n Creator Hub](<url>) · [TeloSignal](https://telosignal.com)
 
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D<version>-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue)
+
+> <Hormozi Value Claim — one sentence: what disproportionate outcome does this deliver and for whom?>
+
 ## What this workflow does
 
 [2–3 sentences. Plain language. What it does, what triggers it, what it produces.]
 ```
+
+Replace `<version>` with the minimum n8n version required (check node typeVersions in workflow.json). Add `· 2.x compatible` badge only when verified.
+
+#### 1b. Workflow Overview
+
+```markdown
+## Workflow Overview
+
+![Workflow canvas](./screenshot.png)
+```
+
+Static screenshot of the n8n canvas. File must be named `screenshot.png` and placed in the workflow folder. If not yet captured: `<!-- screenshot.png — export canvas from n8n UI and place in this folder -->`.
 
 #### 2. Metric
 
@@ -234,6 +250,20 @@ What failure mode it prevents. What tradeoff it accepts.]
 This is the use-case exploration prompt.]
 ```
 
+#### 5b. Prerequisites (Required)
+
+```markdown
+## Prerequisites
+
+| Requirement | Detail |
+|---|---|
+| n8n version | ≥ x.x · 2.x compatible |
+| Credentials | List each required credential type |
+| n8n features | Data tables / Community nodes / LangChain (delete as appropriate) |
+```
+
+If no external credentials needed: state "No external credentials required — fully native n8n."
+
 #### 6. Setup (Required)
 
 A numbered setup section. Must include: import instructions, credential configuration steps, any variables that need to be changed, and a test command or method.
@@ -241,6 +271,17 @@ A numbered setup section. Must include: import instructions, credential configur
 #### 7. Nodes Used (Required)
 
 A markdown table with columns `Node` and `Purpose`. Every non-trivial node must be listed.
+
+#### 8. Related (Required)
+
+```markdown
+## Related
+
+- [Workflow Name](../sibling-folder/) — one-line description
+- [n8n docs: Node Name](https://docs.n8n.io/...) — what it covers
+```
+
+Minimum: 1 internal vault link + 1 external n8n docs link.
 
 ### Enforcement
 
@@ -274,6 +315,11 @@ A task is complete only when ALL of the following are true:
 - [ ] All environment variables follow the prefix scheme
 - [ ] `README.md` exists in the workflow folder
 - [ ] `README.md` contains all 4 formula elements (Metric, Pattern, Principle, Question)
+- [ ] `README.md` contains Hormozi Value Claim in header block (no label prefix)
+- [ ] `README.md` contains badges (n8n min version + MIT license)
+- [ ] `README.md` contains Workflow Overview section (screenshot.png or placeholder comment)
+- [ ] `README.md` contains Prerequisites section
+- [ ] `README.md` contains Related section (≥1 internal vault link + ≥1 external n8n docs link)
 - [ ] Expert Veto review completed and status is CLEARED
 
 ## MCP Infrastructure
