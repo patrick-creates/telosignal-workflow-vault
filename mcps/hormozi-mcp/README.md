@@ -20,12 +20,12 @@ It fetches any workflow from this vault and critiques it through Alex Hormozi's 
 
 Fetches a workflow from the vault and runs it through the Hormozi knowledge base.
 
-`workflow_name` is the path relative to the `WORKFLOW_GITHUB_RAW_BASE` folder, without file extension. The extension is appended automatically (default: `.md`, set via `WORKFLOW_EXTENSION`).
+`workflow_name` is the file path relative to the `WORKFLOW_GITHUB_RAW_BASE` folder, without file extension. The extension from `WORKFLOW_EXTENSION` is appended (`.env.example` uses `.md`, so the tool reads a workflow's `README`; set `.json` and pass `<folder>/workflow` to analyse the raw workflow JSON).
 
 **Example:**
 
 ```text
-analyze_vault_workflow("data-enrichment/google-sheets-batch-enrichment")
+analyze_vault_workflow("data-enrichment/google-sheets-batch-enrichment/README")
 ```
 
 ### `test_server()`
@@ -82,7 +82,7 @@ vercel deploy --prod
 
 Note the production URL from the output, e.g. `https://<your-vercel-project>.vercel.app`.
 
-Set the `API_ANTHROPIC_KEY` environment variable in your Vercel project settings before using `analyze_vault_workflow`.
+Set all four environment variables from `.env.example` in your Vercel project settings before using `analyze_vault_workflow` — the server does not start without them.
 
 Your MCP endpoint: `https://<your-vercel-project>.vercel.app/mcp`
 
@@ -113,21 +113,21 @@ Restart your client after saving. Verify that `analyze_vault_workflow` appears i
 
 ```bash
 cd mcps/hormozi-mcp
-cp .env.example .env        # then fill in API_ANTHROPIC_KEY
+cp .env.example .env        # then fill in all four values
 pip install -r requirements.txt
 uvicorn api.index:app --host 127.0.0.1 --port 8787
 ```
 
 Local MCP endpoint: `http://127.0.0.1:8787/mcp`
 
-**Environment variables** (all optional except `API_ANTHROPIC_KEY`):
+**Environment variables** (all four required — the code has no defaults):
 
 | Variable | Default | Purpose |
 | --- | --- | --- |
-| `API_ANTHROPIC_KEY` | — | **Required.** Your Anthropic API key |
-| `API_MODEL` | `claude-opus-4-7` | Claude model used for analysis |
-| `WORKFLOW_GITHUB_RAW_BASE` | `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows` | Base URL for vault fetches — override when forking |
-| `WORKFLOW_EXTENSION` | `.md` | File extension appended to workflow name |
+| `API_ANTHROPIC_KEY` | — | Your [OpenRouter](https://openrouter.ai/keys) API key (requests go to `openrouter.ai/api/v1`) |
+| `API_MODEL` | — | OpenRouter model ID, e.g. `anthropic/claude-sonnet-4-5` |
+| `WORKFLOW_GITHUB_RAW_BASE` | — | Base URL for vault fetches, e.g. `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows` |
+| `WORKFLOW_EXTENSION` | — | File extension appended to workflow name, e.g. `.md` |
 
 ---
 
@@ -227,6 +227,6 @@ Expected response on Step 3:
 | Framework       | MCP Python SDK (`mcp[cli]>=1.23.0`)                                                                                                                |
 | Transport       | Streamable HTTP via `mcp.streamable_http_app()`                                                                                                    |
 | Deployment      | Vercel (Python serverless, entrypoint `api/index.py`)                                                                                              |
-| Model           | Configurable via `API_MODEL` env var (default: `claude-opus-4-7`)                                                                                  |
+| Model           | Any OpenRouter model via `API_MODEL` env var (no default)                                                                                          |
 | Max tokens      | 1024 per response — edit `max_tokens` in `api/index.py` for longer workflows                                                                       |
 | Host validation | Disabled via `TransportSecuritySettings` — required for Vercel serverless (Vercel's runtime doesn't perform DNS resolution the MCP SDK expects)    |

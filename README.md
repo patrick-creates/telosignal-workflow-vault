@@ -3,11 +3,15 @@
 
 # TeloSignal Workflow Vault
 
+**Most n8n templates stop at the happy path and leave you guessing how to set them up and test them.** Every workflow here ships with its own README: canvas screenshot, prerequisites and step-by-step setup.
+
 > Production-ready n8n workflow templates — built and maintained by [TeloSignal](https://telosignal.com), The n8n Workflow Intelligence Index.
 
 Most n8n workflows are built to "just work." These are built to scale. This vault contains the core logic used by TeloSignal to manage complex data lineage, automated testing, and high-volume processing.
 
 Published on the [n8n Creator Hub](https://n8n.io/creators/patrickn8n/).
+
+⭐ If a workflow here saves you a build, a star helps other n8n users find the vault.
 
 ---
 
@@ -39,12 +43,11 @@ Every workflow here is built to address specific **"High-Value Scarcity"** gaps 
 
 ---
 
-## 🛠️ How to Use
+## 🛠️ Quick Start
 
-1.  **Browse:** Select a workflow from the table above.
-2.  **Download:** Copy the `workflow.json` file from the directory.
-3.  **Import:** In your n8n instance, click **Import from File** or simply paste the JSON into the canvas.
-4.  **Configure:** Add your specific credentials and environment variables as noted in the workflow annotations.
+1.  **Download:** Pick a workflow from the table above and copy its `workflow.json`.
+2.  **Import:** In your n8n instance, click **Import from File** or paste the JSON into the canvas.
+3.  **Configure & run:** Add the credentials and variables listed in the workflow's README and sticky notes, then run it once.
 
 ---
 
@@ -54,7 +57,7 @@ This vault includes AI Experts hosted on Vercel.
 ### Hormozi Expert
 
 - **Location:** [mcps/hormozi-mcp](mcps/hormozi-mcp/)
-- **SSE Endpoint:** `https://<your-vercel-project>.vercel.app/sse`
+- **MCP Endpoint (Streamable HTTP):** `https://<your-vercel-project>.vercel.app/mcp`
 - **Tool:** `analyze_vault_workflow`
 - **Usage:** Critique workflows using the $100M Offer framework.
 
