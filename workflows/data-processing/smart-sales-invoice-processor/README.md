@@ -66,7 +66,7 @@ What would you automate next — real email delivery via Gmail/SMTP, or a dashbo
 | grand_total    | Number   | 109.98               |
 | created_at     | DateTime | 2025-11-03T08:00:00Z |
 
-2. Import `workflow.json` into n8n
+2. Import `workflow.json` into n8n, then select your **Products** table in the **Load Product Catalog** node and your **Invoices** table in the **Insert row** node
 3. Configure credentials: none required (fully native)
 4. Activate and test:
    ```bash
