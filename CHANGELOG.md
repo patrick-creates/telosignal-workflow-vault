@@ -2,6 +2,18 @@
 
 All notable changes to this project are documented here. Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Changed
+- README leads with the Guardrails benchmark; marketing paragraphs replaced by a plain description of the four README questions and where workflow ideas come from.
+- Workflow table and each workflow README link to its own Creator Hub page.
+- Value lines in the workflow READMEs no longer make unmeasured claims (e.g. "80 %").
+
+### Fixed
+- Batch Enrichment README listed an Error Trigger and Error Logger that the workflow does not contain; the node table now matches `workflow.json`.
+- Invoice Processor README said it sends email notifications; it prepares them, sending is not part of the workflow.
+- Removed leftover screenshot placeholder comments.
+
 ## [1.0.0] – 2026-10-25
 
 First tagged release.

@@ -1,18 +1,17 @@
 # Smart Sales Invoice Processor
 
-> Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
+> Published on [n8n Creator Hub](https://n8n.io/workflows/10274-process-sales-csvs-into-invoices-with-data-tables-and-email-notifications/) · [TeloSignal](https://telosignal.com)
 
 ![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-> Reduce payment time-delays and administrative effort by 80%, turning a brittle manual billing process into a durable, scalable revenue engine.
+> Turn a sales CSV into validated invoices with one webhook call, and get a clear 400 or 409 back when the data is wrong or already processed.
 
 ## What this workflow does
 
-Transforms uploaded sales CSV files into validated, enriched invoices stored in n8n Data tables with automated email notifications.
+Transforms uploaded sales CSV files into validated, enriched invoices stored in n8n Data tables and prepares a confirmation email per invoice (sending is left to you, see Question).
 
 ## Workflow Overview
 
-<!-- screenshot.png — export canvas from n8n UI and place in this folder -->
 ![Smart Sales Invoice Processor workflow canvas](screenshot.png)
 
 ## Metric

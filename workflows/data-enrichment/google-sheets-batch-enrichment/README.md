@@ -1,6 +1,6 @@
 # Google Sheets Batch Enrichment
 
-> Published on [n8n Creator Hub](https://n8n.io/creators/patrickn8n/) · [TeloSignal](https://telosignal.com)
+> Published on [n8n Creator Hub](https://n8n.io/workflows/14205-enrich-google-sheets-rows-via-any-rest-api-in-rate-limited-batches/) · [TeloSignal](https://telosignal.com)
 
 ![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
@@ -12,7 +12,6 @@ Reads every row from a Google Sheet, calls a configurable REST API once per row 
 
 ## Workflow Overview
 
-<!-- screenshot.png — export canvas from n8n UI and place in this folder -->
 ![Google Sheets Batch Enrichment workflow canvas](screenshot.png)
 
 ## Metric
@@ -62,9 +61,10 @@ Which other data source would you enrich this way — a CRM export, a lead list,
 | Split In Batches           | Splits rows into configurable-size batches                       |
 | HTTP Request               | Calls external REST API once per row (GET or POST, Header Auth)  |
 | Wait                       | Pauses 1 second between batches to respect rate limits           |
+| IF (API Success?)          | Routes each response to the success or the error branch          |
 | Google Sheets (Update Row) | Writes enriched data back to the sheet on success                |
-| Error Logger               | Captures and logs failed API calls separately                    |
-| Error Trigger              | Activates on workflow failure; routes to notification/log node   |
+| Set (Capture Error)        | Records failed API calls separately instead of stopping the run  |
+| Merge (Merge Results)      | Joins both branches before the next batch                        |
 
 ## Related
 

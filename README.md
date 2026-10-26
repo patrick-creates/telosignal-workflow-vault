@@ -3,43 +3,34 @@
 
 # TeloSignal Workflow Vault
 
-**Most n8n templates stop at the happy path and leave you guessing how to set them up and test them.** Every workflow here ships with its own README: canvas screenshot, prerequisites and step-by-step setup.
+n8n workflow templates with the part most templates skip written down: every workflow ships with its own README, canvas screenshot, prerequisites and step-by-step setup. All three are published on the [n8n Creator Hub](https://n8n.io/creators/patrickn8n/).
 
-> Production-ready n8n workflow templates — built and maintained by [TeloSignal](https://telosignal.com), The n8n Workflow Intelligence Index.
-
-Most n8n workflows are built to "just work." These are built to scale. This vault contains the core logic used by TeloSignal to manage complex data lineage, automated testing, and high-volume processing.
-
-Published on the [n8n Creator Hub](https://n8n.io/creators/patrickn8n/).
+**Start here: [Benchmark Content Safety Guardrails](workflows/ai-safety/benchmark-content-safety-guardrails/).** It runs 36 labelled test prompts (PII, NSFW, jailbreak attempts, secret keys, unsafe URLs) through the n8n Guardrails node and emails accuracy, precision, recall and F1 per category. Run it before you trust a guardrail in production.
 
 ⭐ If a workflow here saves you a build, a star helps other n8n users find the vault.
 
 ---
 
-## 💎 The TeloSignal Standard
+## Workflows
 
-Every workflow in this repository is built using our proprietary **4-Element Formula**. We don't just move data; we build intelligence.
+| Workflow | Category | What it does | Creator Hub |
+|----------|----------|--------------|-------------|
+| [Benchmark Content Safety Guardrails](workflows/ai-safety/benchmark-content-safety-guardrails/) | AI Safety | 36 labelled prompts through the Guardrails node, metrics report by email | [#10729](https://n8n.io/workflows/10729-benchmark-content-safety-guardrails-with-automated-test-suite-and-reports/) |
+| [Google Sheets Batch Enrichment](workflows/data-enrichment/google-sheets-batch-enrichment/) | Data Enrichment | Calls a REST API per sheet row in rate-limited batches and writes the result back | [#14205](https://n8n.io/workflows/14205-enrich-google-sheets-rows-via-any-rest-api-in-rate-limited-batches/) |
+| [Smart Sales Invoice Processor](workflows/data-processing/smart-sales-invoice-processor/) | Data Processing | Turns a sales CSV into validated invoices in n8n Data tables, with 200/400/409 responses | [#10274](https://n8n.io/workflows/10274-process-sales-csvs-into-invoices-with-data-tables-and-email-notifications/) |
 
-* **Metric:** Defining the success criteria for the automation.
-* **Pattern:** Utilizing proven architectural structures for data flow.
-* **Principle:** Applying rigorous logic gates and error-handling rules.
-* **Question:** Ensuring the workflow answers a specific business hypothesis.
+## How each workflow is documented
 
----
+Every workflow README answers the same four questions in the same order, so you can compare them at a glance:
 
-## 📊 Market Intelligence Source
-This repository is the execution arm of the [TeloSignal n8n Demand Index](https://www.telosignal.com/data/n8n-use-case-demand-index). 
+* **Metric:** which number shows that the workflow works.
+* **Pattern:** the data flow in one sentence.
+* **Principle:** why it is built this way and which failure it prevents.
+* **Question:** one prompt for adapting it to your own case.
 
-Every workflow here is built to address specific **"High-Value Scarcity"** gaps identified in our weekly index of 13,500+ templates. We don't build random automations; we build for the categories where demand is high but reliable solutions are scarce.
+## Where the ideas come from
 
----
-
-## 🚀 Workflows
-
-| Workflow | Category | Description |
-|----------|----------|-------------|
-| [Google Sheets Batch Enrichment](workflows/data-enrichment/google-sheets-batch-enrichment/) | Data Enrichment | API batch enrichment into Google Sheets |
-| [Smart Sales Invoice Processor](workflows/data-processing/smart-sales-invoice-processor/) | Data Processing | Invoice processing with Data Tables |
-| [Benchmark Content Safety Guardrails](workflows/ai-safety/benchmark-content-safety-guardrails/) | AI Safety | Automated test suite & reports for content safety |
+[TeloSignal](https://www.telosignal.com/data/n8n-use-case-demand-index) indexes 13,500+ public n8n templates every week. New workflows in this vault target categories where that index shows demand but few well-documented templates.
 
 ---
 

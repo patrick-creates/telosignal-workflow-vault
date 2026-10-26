@@ -4,7 +4,7 @@
 
 ![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.119-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-> Protect your brand's 'Dream Outcome' by reducing the risk of catastrophic AI hallucinations to near-zero through automated verification.
+> Find out where your guardrail misses harmful input or blocks harmless input before your users do: 36 labelled prompts, one report.
 
 ## What this workflow does
 
@@ -12,7 +12,6 @@ Runs 36 structured test prompts through the n8n Guardrails node, classifies each
 
 ## Workflow Overview
 
-<!-- screenshot.png — export canvas from n8n UI and place in this folder -->
 ![Benchmark Content Safety Guardrails workflow canvas](screenshot.png)
 
 ## Metric
