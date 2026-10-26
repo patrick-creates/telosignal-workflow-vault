@@ -2,7 +2,7 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/workflows/14205-enrich-google-sheets-rows-via-any-rest-api-in-rate-limited-batches/) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![tested on n8n 2.x](https://img.shields.io/badge/tested-n8n%202.x-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Enrich entire spreadsheets at scale without triggering rate limits — turning a manual API-per-row task into a hands-off batch pipeline.
 
@@ -36,7 +36,7 @@ Which other data source would you enrich this way — a CRM export, a lead list,
 
 | Requirement | Detail |
 |---|---|
-| n8n version | ≥ 1.0 · 2.x compatible |
+| n8n version | tested on 2.x (older versions not checked) |
 | Credentials | Google Sheets OAuth2, Header Auth (for external API) |
 | n8n features | None — core nodes only |
 

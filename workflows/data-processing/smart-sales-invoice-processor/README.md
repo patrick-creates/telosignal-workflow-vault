@@ -2,7 +2,7 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/workflows/10274-process-sales-csvs-into-invoices-with-data-tables-and-email-notifications/) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.0-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![tested on n8n 2.x](https://img.shields.io/badge/tested-n8n%202.x-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Turn a sales CSV into validated invoices with one webhook call, and get a clear 400 or 409 back when the data is wrong or already processed.
 
@@ -36,7 +36,7 @@ What would you automate next — real email delivery via Gmail/SMTP, or a dashbo
 
 | Requirement | Detail |
 |---|---|
-| n8n version | ≥ 1.0 · 2.x compatible |
+| n8n version | tested on 2.x (older versions not checked) |
 | Credentials | None — fully native n8n |
 | n8n features | Data tables (built-in from n8n 1.x+) |
 

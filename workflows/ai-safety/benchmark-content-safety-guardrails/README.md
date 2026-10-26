@@ -2,7 +2,7 @@
 
 > Published on [n8n Creator Hub](https://n8n.io/workflows/10729-benchmark-content-safety-guardrails-with-automated-test-suite-and-reports/) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.119-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![n8n version](https://img.shields.io/badge/n8n-%3E%3D1.119-orange) ![tested on n8n 2.x](https://img.shields.io/badge/tested-n8n%202.x-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
 > Find out where your guardrail misses harmful input or blocks harmless input before your users do: 36 labelled prompts, one report.
 
@@ -36,7 +36,7 @@ Which safety category has the lowest recall in your environment, and would tight
 
 | Requirement | Detail |
 |---|---|
-| n8n version | ≥ 1.119 · 2.x compatible |
+| n8n version | ≥ 1.119 (Guardrails node) · tested on 2.x |
 | Credentials | OpenAI API key, Gmail OAuth2 |
 | n8n features | LangChain nodes (built-in from n8n 1.x+) |
 
