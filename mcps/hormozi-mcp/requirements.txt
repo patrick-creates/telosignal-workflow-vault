@@ -1,7 +1,0 @@
-mcp[cli]>=1.23.0
-requests
-openai
-httpx
-starlette
-uvicorn
-python-dotenv

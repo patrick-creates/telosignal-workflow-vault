@@ -4,7 +4,12 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 
 ## [Unreleased]
 
+### Removed
+- Hormozi MCP expert (`mcps/hormozi-mcp/`), its README section and the Pylint workflow that only covered it; CodeQL now scans Actions only.
+- Expert-veto review and MCP instructions from `CLAUDE.md`.
+
 ### Changed
+- Workflow READMEs state the n8n version they were tested on (2.x) instead of unchecked minimum versions.
 - README leads with the Guardrails benchmark; marketing paragraphs replaced by a plain description of the four README questions and where workflow ideas come from.
 - Workflow table and each workflow README link to its own Creator Hub page.
 - Value lines in the workflow READMEs no longer make unmeasured claims (e.g. "80 %").

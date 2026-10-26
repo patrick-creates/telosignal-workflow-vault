@@ -121,52 +121,6 @@ Sticky notes are part of the workflow documentation. Use them. Every workflow mu
 
 ---
 
-## Expert Veto — Pre-Completion Review (MANDATORY)
-
-Before marking any task complete, the agent must simulate a two-expert veto review. Do not skip this step. Do not abbreviate it.
-
-Run the following internal check and include the result in your completion summary.
-
-### Expert 1 — Alex Hormozi (Value Lens)
-
-Hormozi asks: *Does this deliver disproportionate value? Is the outcome obvious and immediate to the user?*
-
-Ask yourself:
-
-- What concrete result does this workflow/change produce for the end user?
-- Is the value obvious without explanation, or does it require justification?
-- Would a non-technical business owner immediately understand what they gain?
-- Is there a measurable output (invoices created, leads enriched, tests passed, errors caught)?
-- If the answer to any of these is "no" or "unclear" — the task is not complete. Add the missing value signal before finishing.
-
-### Expert 2 — Warren Buffett (Moat Lens)
-
-Buffett asks: *Does this compound? Is the value durable?*
-
-Ask yourself:
-
-- Does this workflow produce increasing returns the more it is used? (Data accumulates, accuracy improves, time saved scales.)
-- Does it avoid brittle dependencies — external APIs that could disappear, credentials hardcoded in nodes, undocumented magic values?
-- Would someone running this in 12 months be able to maintain it without asking the original author?
-- Is there a moat here — does this template do something that generic n8n templates cannot easily replicate?
-- If the answer is "this is disposable / one-shot / fragile" — the task is not complete. Harden it before finishing.
-
-### Veto Output Format
-
-Include this block in your completion message:
-
-```text
-## Expert Veto Review
-
-**Hormozi (Value):** [One sentence: what concrete value does this deliver and to whom.]
-**Buffett (Moat):** [One sentence: why this is durable and maintainable long-term.]
-**Veto status:** CLEARED / BLOCKED — [reason if blocked]
-```
-
-If either expert would veto, status is BLOCKED. Fix the issue. Re-run the review. Only proceed when CLEARED.
-
----
-
 ## Workflow Metadata — 4-Element Formula (MANDATORY)
 
 Every workflow in this repo must be in its own folder. No `.json` file exists at the root of a category without an accompanying folder structure.
@@ -192,16 +146,16 @@ Every `README.md` must follow the 4-element formula in this exact order:
 
 > Published on [n8n Creator Hub](<url>) · [TeloSignal](https://telosignal.com)
 
-![n8n version](https://img.shields.io/badge/n8n-%3E%3D<version>-orange) ![n8n 2.x](https://img.shields.io/badge/2.x-compatible-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![tested on n8n <version>](https://img.shields.io/badge/tested-n8n%20<version>-brightgreen) ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-> <Hormozi Value Claim — one sentence: what disproportionate outcome does this deliver and for whom?>
+> <Value line — one sentence: what concrete outcome does this deliver and for whom? No unmeasured numbers.>
 
 ## What this workflow does
 
 [2–3 sentences. Plain language. What it does, what triggers it, what it produces.]
 ```
 
-Replace `<version>` with the minimum n8n version required (check node typeVersions in workflow.json). Add `· 2.x compatible` badge only when verified.
+Replace `<version>` with the n8n version you actually tested on (e.g. `2.x`). Add a minimum-version badge only when a node requires it and you checked it.
 
 #### 1b. Workflow Overview
 
@@ -257,7 +211,7 @@ This is the use-case exploration prompt.]
 
 | Requirement | Detail |
 |---|---|
-| n8n version | ≥ x.x · 2.x compatible |
+| n8n version | tested on x.x (add a minimum only when verified) |
 | Credentials | List each required credential type |
 | n8n features | Data tables / Community nodes / LangChain (delete as appropriate) |
 ```
@@ -315,29 +269,8 @@ A task is complete only when ALL of the following are true:
 - [ ] All environment variables follow the prefix scheme
 - [ ] `README.md` exists in the workflow folder
 - [ ] `README.md` contains all 4 formula elements (Metric, Pattern, Principle, Question)
-- [ ] `README.md` contains Hormozi Value Claim in header block (no label prefix)
-- [ ] `README.md` contains badges (n8n min version + MIT license)
+- [ ] `README.md` contains a value line in the header block (no label prefix)
+- [ ] `README.md` contains badges (tested n8n version + MIT license)
 - [ ] `README.md` contains Workflow Overview section (screenshot.png or placeholder comment)
 - [ ] `README.md` contains Prerequisites section
 - [ ] `README.md` contains Related section (≥1 internal vault link + ≥1 external n8n docs link)
-- [ ] Expert Veto review completed and status is CLEARED
-
-## MCP Infrastructure
-
-- To run the Hormozi Expert locally: `cd mcps/hormozi-mcp && uvicorn api.index:app --host 127.0.0.1 --port 8787` (endpoint `/mcp`)
-- Deployment: Hosted on Vercel.
-- Frameworks: MCP Python SDK (`mcp>=1.23.0`). DNS rebinding protection disabled via `TransportSecuritySettings(enable_dns_rebinding_protection=False)` — required for Vercel deployment.
-- Live MCP endpoint (Streamable HTTP): `https://<your-vercel-project>.vercel.app/mcp`
-
-## Workflow Commands
-
-- Use `analyze_vault_workflow(name)` to critique any file in the `/workflows` directory.
-- Refer to `mcps/hormozi-mcp/api/hormozi_kb.md` (UTF-16) for Alex Hormozi's business logic.
-
-### MCP Expert Guidelines
-
-- **Expert Path:** All experts live in `/mcps/[expert-name]`
-- **Deployment:** Each expert is a standalone Vercel Project.
-- **Workflow Access:** Experts fetch raw data from `https://raw.githubusercontent.com/patrick-creates/telosignal-workflow-vault/main/workflows/`.
-- **README required:** Every expert folder must contain a `README.md` with: what the expert does, available tools, setup instructions (deploy + local), and stack details.
-- **Adding Experts:** To add a new expert, duplicate `hormozi-mcp`, update `api/index.py`, the KB, and `README.md`, then deploy to a new Vercel project.

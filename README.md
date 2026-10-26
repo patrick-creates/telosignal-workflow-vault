@@ -42,18 +42,6 @@ Every workflow README answers the same four questions in the same order, so you 
 
 ---
 
-## 🧠 MCP Experts
-This vault includes AI Experts hosted on Vercel.
-
-### Hormozi Expert
-
-- **Location:** [mcps/hormozi-mcp](mcps/hormozi-mcp/)
-- **MCP Endpoint (Streamable HTTP):** `https://<your-vercel-project>.vercel.app/mcp`
-- **Tool:** `analyze_vault_workflow`
-- **Usage:** Critique workflows using the $100M Offer framework.
-
----
-
 ## 📝 License
 
 Distributed under the MIT License. See [LICENSE](https://github.com/patrick-creates/telosignal-workflow-vault/blob/main/LICENSE)  for more information.
