@@ -1,0 +1,673 @@
+{
+  "name": "Follow up on quotes and chase unpaid invoices with Google Sheets and Gmail",
+  "nodes": [
+    {
+      "parameters": {
+        "content": "## Follow up on quotes and chase unpaid invoices\n\n### How it works\nFor freelancers and small teams who send quotes and invoices by email and track them in one Google Sheet. Every weekday at 8:00 the workflow reads the sheet and sends the next follow-up for each open row: quotes 3, 7 and 14 days after sending, invoices 3, 10 and 21 days after the due date. It saves the stage in the sheet, so nothing is sent twice. Rows still open a week after the last email land on a call list. Rows with a bad date or email are skipped and listed.\n\nYou get a summary email on every run, also when nothing was due. If it doesn't arrive, the workflow didn't run.\n\n### Setup\n1. Create a Google Sheet with the columns type, number, client_name, client_email, amount, date, status, last_stage, last_sent_at. type is quote or invoice, status is open, amount includes the currency.\n2. Fill in **Settings**: sheet URL, tab name, your email, name and payment details.\n3. Connect Google Sheets (2 nodes) and Gmail (2 nodes) credentials.\n4. Run it once with **dry_run = true**: every email goes to you, the sheet stays unchanged. Check the summary, then set dry_run to false and activate.\n\n### Customization\nChange the day lists in Settings. Email texts are in **Plan follow-ups**. Set a row to paid, won or lost to stop it.",
+        "height": 660,
+        "width": 480
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000001",
+      "name": "Note 1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -560,
+        -420
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Read the sheet\nAll values you need to change are in **Settings**.",
+        "height": 300,
+        "width": 660,
+        "color": 7
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000002",
+      "name": "Note 2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -60,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Decide what is due\nOne email per row and run, at most. A late start sends only the highest due stage.",
+        "height": 300,
+        "width": 440,
+        "color": 7
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000003",
+      "name": "Note 3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        640,
+        -260
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Send and save the stage\nA failed email is not saved and goes out again on the next run.",
+        "height": 520,
+        "width": 980,
+        "color": 7
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000004",
+      "name": "Note 4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        -360
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Daily summary to you\nSent, failed, call list and rows to fix.",
+        "height": 260,
+        "width": 440,
+        "color": 7
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000005",
+      "name": "Note 5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        640,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "content": "### ⚠️ dry_run\nStarts as **true**: emails go to you only. Set it to false before you activate.",
+        "height": 180,
+        "width": 220,
+        "color": 3
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000006",
+      "name": "Note 6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        180,
+        170
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000007",
+      "name": "Every weekday at 8:00",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000008",
+              "name": "sheet_url",
+              "value": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000009",
+              "name": "sheet_tab",
+              "value": "Follow-ups",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000010",
+              "name": "owner_email",
+              "value": "you@example.com",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000011",
+              "name": "your_name",
+              "value": "Your Name",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000012",
+              "name": "your_company",
+              "value": "Your Company",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000013",
+              "name": "payment_details",
+              "value": "IBAN DE00 0000 0000 0000 0000 00, reference: invoice number",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000014",
+              "name": "quote_days",
+              "value": "3,7,14",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000015",
+              "name": "invoice_days",
+              "value": "3,10,21",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000016",
+              "name": "call_after_days",
+              "value": 7,
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000017",
+              "name": "dry_run",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000018",
+      "name": "Settings",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "={{ $('Settings').first().json.sheet_url }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Settings').first().json.sheet_tab }}"
+        },
+        "options": {
+          "outputFormatting": {
+            "values": {
+              "general": "UNFORMATTED_VALUE",
+              "date": "SERIAL_NUMBER"
+            }
+          }
+        }
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000019",
+      "name": "Read follow-up sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        440,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rules: days after the quote date / after the invoice due date, from Settings.\n// Only rows with status \"open\" are handled. Change any other status (paid, won, lost) to stop.\nconst DAY_MS = 86400000;\n\nfunction parseDays(s, fallback) {\n  const d = String(s ?? '').split(',').map((x) => parseInt(x, 10)).filter((n) => n >= 0);\n  return d.length ? d.sort((a, b) => a - b) : fallback;\n}\n\nfunction isoDay(s) {\n  if (typeof s === 'number') return s > 0 ? Math.round((Math.floor(s) - 25569) * 86400000) : null;\n  const m =/^(\\d{4})-(\\d{2})-(\\d{2})$/.exec(String(s ?? '').trim());\n  if (!m) return null;\n  const t = Date.UTC(+m[1], +m[2] - 1, +m[3]);\n  return new Date(t).getUTCDate() === +m[3] ? t : null; // rejects 2026-02-30\n}\n\nfunction message(type, stage, total, r, days, cfg) {\n  const hi = `Hi ${r.client_name || 'there'},`;\n  const bye = `\\n\\nBest regards,\\n${cfg.your_name}${cfg.your_company ? `\\n${cfg.your_company}` : ''}`;\n  const last = stage === total;\n  if (type === 'quote') {\n    if (stage === 1) return [`Quick check on quote ${r.number}`, `${hi}\\n\\nI sent you quote ${r.number} (${r.amount}) on ${r.date}. Did you have a chance to look at it? I'm happy to answer any questions.${bye}`];\n    if (!last) return [`Any questions about quote ${r.number}?`, `${hi}\\n\\nI'm following up on quote ${r.number} (${r.amount}). If anything is unclear or you'd like a change, just reply to this email.${bye}`];\n    return [`Should I close quote ${r.number}?`, `${hi}\\n\\nI haven't heard back about quote ${r.number} (${r.amount}). If now isn't the right time, no problem: reply and I'll close it on my side. If you'd like to go ahead, a short \"yes\" is enough.${bye}`];\n  }\n  const pay = cfg.payment_details ? `\\n\\nPayment details: ${cfg.payment_details}` : '';\n  const paid = '\\n\\nIf you have already paid, please ignore this email.';\n  if (stage === 1) return [`Friendly reminder: invoice ${r.number}`, `${hi}\\n\\nInvoice ${r.number} (${r.amount}) was due on ${r.date}. In case it slipped through, here is a quick reminder.${pay}${paid}${bye}`];\n  if (!last) return [`Second reminder: invoice ${r.number} is ${days} days overdue`, `${hi}\\n\\nInvoice ${r.number} (${r.amount}) is now ${days} days overdue. Could you let me know when I can expect payment?${pay}${paid}${bye}`];\n  return [`Final reminder: invoice ${r.number}`, `${hi}\\n\\nInvoice ${r.number} (${r.amount}) is ${days} days overdue. Please arrange payment within 7 days, or reply if there is a problem with the invoice.${pay}${paid}${bye}`];\n}\n\nfunction plan(rows, cfg, today) {\n  const now = isoDay(today);\n  const ladders = { quote: parseDays(cfg.quote_days, [3, 7, 14]), invoice: parseDays(cfg.invoice_days, [3, 10, 21]) };\n  const callAfter = parseInt(cfg.call_after_days, 10) >= 0 ? parseInt(cfg.call_after_days, 10) : 7;\n  const dry = cfg.dry_run === true || String(cfg.dry_run).toLowerCase() === 'true';\n  const out = [];\n  for (const r of rows) {\n    if (String(r.status ?? '').trim().toLowerCase() !== 'open') continue; // paid, won, lost, empty row: stop\n    const base = { row_number: r.row_number, type: String(r.type ?? '').trim().toLowerCase(), number: r.number, client_name: r.client_name, client_email: String(r.client_email ?? '').trim(), dry_run: dry };\n    const steps = ladders[base.type];\n    const start = isoDay(r.date);\n    const problem = !steps ? 'type must be \"quote\" or \"invoice\"'\n      : start === null ? 'date must be a date cell or YYYY-MM-DD text'\n      : !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(base.client_email) ? 'client_email is missing or invalid'\n      : null;\n    if (problem) { out.push({ ...base, action: 'attention', reason: problem }); continue; }\n    const days = Math.floor((now - start) / DAY_MS);\n    const sent = Math.max(0, parseInt(r.last_stage, 10) || 0);\n    const due = steps.filter((d) => days >= d).length;\n    if (due > sent) {\n      // Only the highest due stage goes out, so a late start never sends several emails at once.\n      const [subject, body] = message(base.type, due, steps.length, { ...r, date: new Date(start).toISOString().slice(0, 10) }, days, cfg);\n      out.push({ ...base, action: 'email', new_stage: due, days,\n        to: dry ? cfg.owner_email : base.client_email,\n        subject: dry ? `[TEST for ${base.client_email}] ${subject}` : subject, body });\n    } else if (sent >= steps.length && days >= steps[steps.length - 1] + callAfter) {\n      out.push({ ...base, action: 'call', days, reason: base.type === 'quote' ? 'no answer after the last follow-up' : 'still unpaid after the final reminder' });\n    }\n  }\n  return out;\n}\n\nconst cfg = $('Settings').first().json;\nreturn plan($input.all().map((i) => i.json), cfg, $now.toISODate()).map((json) => ({ json }));"
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000020",
+      "name": "Plan follow-ups",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000021",
+              "leftValue": "={{ $json.action }}",
+              "rightValue": "email",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000022",
+      "name": "Email due?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        920,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000023",
+      "name": "Send follow-up",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1140,
+        -120
+      ],
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000024",
+              "name": "row_number",
+              "value": "={{ $('Plan follow-ups').item.json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000025",
+              "name": "type",
+              "value": "={{ $('Plan follow-ups').item.json.type }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000026",
+              "name": "number",
+              "value": "={{ $('Plan follow-ups').item.json.number }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000027",
+              "name": "client_name",
+              "value": "={{ $('Plan follow-ups').item.json.client_name }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000028",
+              "name": "client_email",
+              "value": "={{ $('Plan follow-ups').item.json.client_email }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000029",
+              "name": "new_stage",
+              "value": "={{ $('Plan follow-ups').item.json.new_stage }}",
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000030",
+              "name": "dry_run",
+              "value": "={{ $('Plan follow-ups').item.json.dry_run }}",
+              "type": "boolean"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000031",
+      "name": "Mark as sent",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1400,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000032",
+              "name": "row_number",
+              "value": "={{ $('Plan follow-ups').item.json.row_number }}",
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000033",
+              "name": "type",
+              "value": "={{ $('Plan follow-ups').item.json.type }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000034",
+              "name": "number",
+              "value": "={{ $('Plan follow-ups').item.json.number }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000035",
+              "name": "client_name",
+              "value": "={{ $('Plan follow-ups').item.json.client_name }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000036",
+              "name": "client_email",
+              "value": "={{ $('Plan follow-ups').item.json.client_email }}",
+              "type": "string"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000037",
+              "name": "new_stage",
+              "value": "={{ $('Plan follow-ups').item.json.new_stage }}",
+              "type": "number"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000038",
+              "name": "dry_run",
+              "value": "={{ $('Plan follow-ups').item.json.dry_run }}",
+              "type": "boolean"
+            },
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000039",
+              "name": "error",
+              "value": "={{ $json.error?.message || $json.error || 'unknown error' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000040",
+      "name": "Mark as failed",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1400,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a1b2c3d4-0000-4000-8000-000000000041",
+              "leftValue": "={{ $json.dry_run }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "false",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000042",
+      "name": "Live run?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1620,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "mode": "url",
+          "value": "={{ $('Settings').first().json.sheet_url }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "mode": "name",
+          "value": "={{ $('Settings').first().json.sheet_tab }}"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $json.row_number }}",
+            "last_stage": "={{ $json.new_stage }}",
+            "last_sent_at": "={{ $today.toISODate() }}"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false,
+              "readOnly": true
+            },
+            {
+              "id": "last_stage",
+              "displayName": "last_stage",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "last_sent_at",
+              "displayName": "last_sent_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000043",
+      "name": "Save stage in sheet",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1840,
+        -220
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Runs after the email branch (it sits lower on the canvas; n8n runs branches top to bottom).\nfunction summarize(planned, sent, failed, cfg, today) {\n  const line = (x) => `- ${x.type} ${x.number}, ${x.client_name || x.client_email}`;\n  const calls = planned.filter((x) => x.action === 'call');\n  const fix = planned.filter((x) => x.action === 'attention');\n  const dry = cfg.dry_run === true || String(cfg.dry_run).toLowerCase() === 'true';\n  const parts = [`Follow-up run ${today}${dry ? ' (TEST MODE: all emails went to you, the sheet was not updated)' : ''}.`];\n  parts.push(`\\nSent (${sent.length}):\\n${sent.map((x) => `${line(x)} (stage ${x.new_stage})`).join('\\n') || '- none due today'}`);\n  if (failed.length) parts.push(`\\nFailed, will retry tomorrow (${failed.length}):\\n${failed.map((x) => `${line(x)}: ${x.error}`).join('\\n')}`);\n  if (calls.length) parts.push(`\\nCall these clients (${calls.length}):\\n${calls.map((x) => `${line(x)}, ${x.days} days, ${x.reason}`).join('\\n')}`);\n  if (fix.length) parts.push(`\\nFix in the sheet, skipped (${fix.length}):\\n${fix.map((x) => `- row ${x.row_number}: ${x.reason}`).join('\\n')}`);\n  return {\n    to: cfg.owner_email,\n    subject: `${dry ? '[TEST] ' : ''}Follow-ups ${today}: ${sent.length} sent, ${failed.length} failed, ${calls.length} to call, ${fix.length} to fix`,\n    body: parts.join('\\n'),\n  };\n}\n\nconst cfg = $('Settings').first().json;\n// If you rename these nodes, rename them here too. A wrong name stops the run with an error instead of reporting 0.\nconst all = (node) => ($(node).isExecuted ? $(node).all().map((i) => i.json) : []); // [] = node didn't run today\nreturn [{ json: summarize(all('Plan follow-ups'), all('Mark as sent'), all('Mark as failed'), cfg, $now.toISODate()) }];"
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000044",
+      "name": "Build daily summary",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        700,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.to }}",
+        "subject": "={{ $json.subject }}",
+        "emailType": "text",
+        "message": "={{ $json.body }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "id": "a1b2c3d4-0000-4000-8000-000000000045",
+      "name": "Email summary to you",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        920,
+        260
+      ]
+    }
+  ],
+  "connections": {
+    "Every weekday at 8:00": {
+      "main": [
+        [
+          {
+            "node": "Settings",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Settings": {
+      "main": [
+        [
+          {
+            "node": "Read follow-up sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read follow-up sheet": {
+      "main": [
+        [
+          {
+            "node": "Plan follow-ups",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Build daily summary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Plan follow-ups": {
+      "main": [
+        [
+          {
+            "node": "Email due?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Email due?": {
+      "main": [
+        [
+          {
+            "node": "Send follow-up",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Send follow-up": {
+      "main": [
+        [
+          {
+            "node": "Mark as sent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark as failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as sent": {
+      "main": [
+        [
+          {
+            "node": "Live run?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Live run?": {
+      "main": [
+        [
+          {
+            "node": "Save stage in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "Build daily summary": {
+      "main": [
+        [
+          {
+            "node": "Email summary to you",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
