@@ -5,6 +5,7 @@ All notable changes to this project are documented here. Format: [Keep a Changel
 ## [Unreleased]
 
 ### Added
+- Workflow **Quote and Invoice Follow-up** (`workflows/sales-follow-up/`, Creator Hub #22462): weekday follow-ups for open quotes and unpaid invoices from a Google Sheet via Gmail, stage saved in the sheet, daily summary with call list. New category `sales-follow-up`.
 - Dependabot version updates for GitHub Actions, monthly and grouped.
 
 ### Removed

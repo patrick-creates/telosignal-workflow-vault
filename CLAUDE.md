@@ -251,7 +251,8 @@ Minimum: 1 internal vault link + 1 external n8n docs link.
 workflows/
 ├── ai-safety/
 ├── data-enrichment/
-└── data-processing/
+├── data-processing/
+└── sales-follow-up/
 ```
 
 New workflows go into the most relevant category folder. If no category fits, propose a new one before creating it — do not dump files at the root of `workflows/`.
